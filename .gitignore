@@ -1,0 +1,65 @@
+# Environment variables (NEVER commit credentials)
+.env
+.env.local
+.env.*.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg-info/
+dist/
+build/
+
+# Tableau workbooks (can be large, regenerate from data)
+*.twbx
+*.twb
+
+# Data files (optional - uncomment if you want to exclude)
+# *.csv
+# data/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Local testing files
+*.tmp
+*.temp
+test_*.py
+
+# Virtual environments
+venv/
+.env/
+env/
+
+# IDE specific
+.classpath
+.project
+.settings/
+.vscode/settings.json
