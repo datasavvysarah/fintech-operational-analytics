@@ -48,7 +48,7 @@
 | **Hizo** | Settlement stage bottleneck (9.33s) | Negotiate SLAs with banks |
 | **Vent Africa** | Bank latency is main delay (23s, not KYC) | Implement retry logic |
 | **Merchant** | Payment processing 43% of time | Batch processing queue |
-| **All** | External API = 24% of latency | Add response caching |
+| **All** | External API = ~32% of latency | Add response caching |
 
 ### File Sizes
 ```

@@ -66,7 +66,7 @@ API PERFORMANCE (All Companies)
   ✓ Average response time: 1.48 seconds
   ✓ P95 response time: 4.96 seconds
   ✓ BOTTLENECK: GET /api/balance (8.8s P95)
-  ✓ TOP ISSUE: External API latency = 24% of request time
+  ✓ TOP ISSUE: External API latency = ~32% of request time
   ✓ ACTION: Add response caching, implement async patterns
 
 ================================================================================

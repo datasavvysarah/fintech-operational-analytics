@@ -182,7 +182,7 @@ Power BI / Tableau (Interactive Dashboards)
 ### For All Companies
 1. **API endpoints slow** (P95: 4.6-8.8s)
  - Action: Add response caching, implement async patterns
-2. **External API latency** (~24% of request time)
+2. **External API latency** (~32% of request time)
  - Action: Rate limiting, connection pooling, regional endpoints
 
 ---

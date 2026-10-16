@@ -70,7 +70,7 @@ API PERFORMANCE (6,000 requests)
   Avg Response:  1,481 ms
   P95 Response:  4,965 ms
   BOTTLENECK:    GET /api/balance (8.8s P95)
-  KEY ISSUE:     External API = 24% of request latency
+  KEY ISSUE:     External API = ~32% of request latency
   ACTION:        Add response caching, circuit breaker
 
 ================================================================================
