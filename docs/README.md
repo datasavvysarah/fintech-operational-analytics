@@ -177,9 +177,9 @@ python3 scripts/quick_analysis.py
 
 **Output Preview:**
 ```
-HIZO Completion: 88.9% | Avg Time: 14.3s | Bottleneck: Settlement (Access Bank latency)
+HIZO Completion: 88.9% | Avg Time: 14.3s | Bottleneck: Settlement stage (9.3s)
 VENT AFRICA Completion: 87.8% | Avg Time: 16.9s | Bottleneck: Bank processing (23s)
-MERCHANT Completion: 85.9% | Avg Time: 12.0s | Bottleneck: Mobile money slower than bank
+MERCHANT Completion: 85.9% | Avg Time: 12.0s | Bottleneck: Payment processing (5.1s)
 API Success Rate: 90.2% | Avg Response: 1.48s | Bottleneck: /api/balance (8.8s P95)
 ```
 
@@ -188,24 +188,24 @@ API Success Rate: 90.2% | Avg Response: 1.48s | Bottleneck: /api/balance (8.8s P
 ## Key Insights Generated
 
 ### Hizo (Cross-Border Payments)
-- **Finding:** Access Bank adds 9.3 seconds vs. GTBank (settlement stage bottleneck)
-- **Action:** Negotiate SLAs or implement bank failover logic
-- **Impact:** Could reduce avg. processing time from 14.3s to 11s
+- **Finding:** Settlement is the slowest stage at 9.3s on average, longer than validation and currency conversion combined (5.0s). Settlement partners differ by under a second (GTBank 14.8s to Access Bank 15.6s average latency), so the delay sits in the settlement step itself, not with one partner.
+- **Action:** Review the settlement workflow and partner SLAs rather than rerouting between banks
+- **Impact:** Settlement accounts for about 65% of the average completed transaction time
 
 ### Vent Africa (Crypto Off-Ramp)
 - **Finding:** Bank processing (23s) is the true bottleneck, NOT KYC (contradicts assumptions)
 - **Action:** Implement retry logic and fallback payment gateway
-- **Impact:** 25% of failures due to bank timeouts are preventable
+- **Impact:** Bank timeouts cause 25% of failures, which retry logic and a fallback gateway target directly
 
 ### Merchant Operations
-- **Finding:** Mobile money is 2.1x slower than bank transfers
+- **Finding:** Payment processing is the slowest stage at 5.1s on average. Payment method makes little difference: mobile money orders take 12.4s end to end against 11.7s for bank transfers (about 6% slower)
 - **Action:** Batch payment processing with async queue
-- **Impact:** Could reduce fulfillment time from 12.0s to 8.5s
+- **Impact:** Payment processing is about 43% of the average completed order time
 
 ### API Performance
 - **Finding:** GET /api/balance endpoint at P95 is 8.8s (external API dependency)
 - **Action:** Add response caching + circuit breaker pattern
-- **Impact:** Reduce external dependency latency by 24%
+- **Impact:** External API latency averages about 32% of response time, so caching and a circuit breaker target a third of request latency
 
 ## Project Roadmap
 
